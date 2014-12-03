@@ -11,4 +11,8 @@ var CalculatorButtonComponent = Ember.Component.extend({
 });
 
 export default CalculatorButtonComponent;
+<<<<<<< HEAD
 
+=======
+g
+>>>>>>> c11ec3fc80e97dc09fe9a3656fc677a46f775993
