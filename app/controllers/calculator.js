@@ -24,14 +24,18 @@ export default Ember.Controller.extend({
      *
      * @param value
      */
-    buttonClicked: function(value) {
+    scalarButtonClicked: function(value) {
+      Ember.Logger.debug('scalarButtonClicked: ' + value);
       var numericalValue = parseInt(value);
       if (isNaN(numericalValue)) { //we have an operation
 
       } else {
         this.get('currentValues').push(numericalValue);
       }
-      Ember.Logger.debug('here: ' + value);
+    },
+    operationButtonClicked: function(operationString) {
+      Ember.Logger.debug("operationButtonClicked: " + operationString);
+
     },
     increaseTheFancy: function() {
       this.transitionToRoute('calculator.fancy');
