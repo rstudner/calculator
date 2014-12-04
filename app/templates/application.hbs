@@ -1,35 +1,11 @@
-<div id="calculator">
-  <div class="result">
-    <input placeholder="" {{bind-attr value="result"}}>
-  </div>
-  <div class="space"></div>
-  <div class="keypad">
-    <div class="row">
-      {{calculator-button symbol="7"}}
-      {{calculator-button symbol="8"}}
-      {{calculator-button symbol="9"}}
-      {{calculator-button symbol="+"}}
+<div {{bind-attr class=":wrapper fancy:fancy:"}}>
+  <div id="calculator">
+    <div class="result">
+      <input placeholder="" {{bind-attr value="result"}}>
     </div>
-    <div class="row">
-      {{calculator-button symbol="4"}}
-      {{calculator-button symbol="5"}}
-      {{calculator-button symbol="6"}}
-      {{calculator-button symbol="-"}}
-    </div>
-    <div class="row">
-      {{calculator-button symbol="1"}}
-      {{calculator-button symbol="2"}}
-      {{calculator-button symbol="3"}}
-      {{calculator-button symbol="&#xF7;"}}
-
-    </div>
-    <div class="row">
-      {{calculator-button symbol=":)"}}
-      {{calculator-button symbol="0"}}
-      {{calculator-button symbol=":p"}}
-      {{calculator-button symbol="&#x00D7;"}}
+    <div class="space"></div>
+    <div class="keypad">
+      {{outlet}}
     </div>
   </div>
 </div>
-
-{{outlet}}
