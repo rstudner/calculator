@@ -5,7 +5,7 @@ import {
 
 moduleFor('controller:calculator/index', 'CalculatorIndexController', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['controller:calculator']
 });
 
 // Replace this with your real tests.
