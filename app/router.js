@@ -6,7 +6,10 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('fancy');
+  this.route('calculator', function() {
+    this.route('regular');
+    this.route('fancy');
+  });
 });
 
 export default Router;

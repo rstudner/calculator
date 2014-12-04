@@ -1,0 +1,15 @@
+<div {{bind-attr class=":wrapper fancy:fancy:"}}>
+  <div id="calculator">
+    <div class="result">
+      <input placeholder="" {{bind-attr value="result"}}>
+    </div>
+    <div class="keypad">
+      {{outlet}}
+    </div>
+  </div>
+  {{#unless fancy}}
+    <div class="goFancy">
+      <button {{action 'increaseTheFancy'}}><h2>Go Fancy!</h2></button>
+    </div>
+  {{/unless}}
+</div>
