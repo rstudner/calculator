@@ -9,14 +9,10 @@ export default Ember.Controller.extend({
     the text field display value
      */
   resultDisplayValue: "",
-  /*
-  the first value provided prior to an operation
-   */
-  firstValue: "0",
-  /*
-  the second value provided after an operation
-   */
-  secondValue: "0",
+
+  inputs: [],
+  currentOperation: null,
+
   /*
   if we just clicked an operation button, make this true, so the next
   numeric clicked knows to replace what is in the text field
@@ -48,6 +44,41 @@ export default Ember.Controller.extend({
   operationClicked: function(operationString) {
     Ember.Logger.debug("operationClicked (controller): " + operationString);
     this.set('operation', true);
+    var currentInputs = this.get('inputs');
+    var currentValue = this.get('resultDisplayValue');
+    var currentOperation = this.get('currentOperation');
 
+    if (!Ember.isNone(currentValue)) {
+      currentInputs.push(currentValue);
+      if (currentInputs.get('length') > 2) {
+        currentInputs.shift();
+      }
+    }
+
+    if (operationString === '=') { //do some computation
+      if (currentInputs.get('length') === 2) {
+        Ember.Logger.debug("current args: " + currentInputs);
+        //actually do the math on the server
+        //via arg1, arg2, operation POST
+        this.set('resultDisplayValue', '');
+        this.set('inputs', []);
+        Ember.$.ajax({
+          url:'/api/compute',
+          data: {
+            operation: currentOperation,
+            args: currentInputs
+          }
+        }).then(function(response) {
+          Ember.Logger.debug(response);
+        });
+      } else {
+        Ember.Logger.debug('dont have 2 inputs, no equalin to be done');
+        //nothing to do yet.
+      }
+    } else {
+      Ember.Logger.debug('not an equal operation');
+      this.set('currentOperation', operationString);
+      this.set('resultDisplayValue', '');
+    }
   }
 });

@@ -2,7 +2,7 @@
   <div id="calculator">
     <div class="result-row">
       <div class="result">
-        <input placeholder="" {{bind-attr value="resultDisplayValue"}}>
+        {{input value=resultDisplayValue}}
       </div>
       <div class="equals">
         {{calculator-button symbol="=" value="=" action="operationButtonClicked"}}
