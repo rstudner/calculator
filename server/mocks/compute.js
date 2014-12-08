@@ -9,7 +9,12 @@ module.exports = function(app) {
   });
 
   computeRouter.post('/', function(req, res) {
-    res.status(201).end();
+    var operation = req.body.operation;
+    var arg1 = parseInt(req.body.args[0]);
+    var arg2 = parseInt(req.body.args[1]);
+    res.status(200).send({
+      "result" : arg1 + arg2
+    });
   });
 
   computeRouter.get('/:id', function(req, res) {

@@ -42,11 +42,13 @@ export default Ember.Controller.extend({
   },
 
   operationClicked: function(operationString) {
+    var self = this;
     Ember.Logger.debug("operationClicked (controller): " + operationString);
     this.set('operation', true);
     var currentInputs = this.get('inputs');
     var currentValue = this.get('resultDisplayValue');
     var currentOperation = this.get('currentOperation');
+    Ember.$('#calculator div.result input').focus();
 
     if (!Ember.isNone(currentValue)) {
       currentInputs.push(currentValue);
@@ -62,15 +64,17 @@ export default Ember.Controller.extend({
         //via arg1, arg2, operation POST
         this.set('resultDisplayValue', '');
         this.set('inputs', []);
-        Ember.$.ajax({
-          url:'/api/compute',
-          data: {
+        this.set('currentOperation', '');
+        Ember.$.post('/api/compute', {
             operation: currentOperation,
             args: currentInputs
-          }
-        }).then(function(response) {
-          Ember.Logger.debug(response);
+          }).then(function(result) {
+          Ember.Logger.debug(result);
+          self.set('resultDisplayValue', result.result);
+
+
         });
+
       } else {
         Ember.Logger.debug('dont have 2 inputs, no equalin to be done');
         //nothing to do yet.
