@@ -1,7 +1,12 @@
 <div {{bind-attr class=":wrapper fancy:fancy:"}}>
   <div id="calculator">
-    <div class="result">
-      <input placeholder="" {{bind-attr value="resultDisplayValue"}}>
+    <div class="result-row">
+      <div class="result">
+        <input placeholder="" {{bind-attr value="resultDisplayValue"}}>
+      </div>
+      <div class="equals">
+        {{calculator-button symbol="=" value="=" action="operationButtonClicked"}}
+      </div>
     </div>
     <div class="keypad">
       {{liquid-outlet}}

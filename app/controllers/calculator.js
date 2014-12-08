@@ -5,9 +5,27 @@ export default Ember.Controller.extend({
   /**
    * Properties
    */
-  resultDisplayValue: "0",
+    /*
+    the text field display value
+     */
+  resultDisplayValue: "",
+  /*
+  the first value provided prior to an operation
+   */
   firstValue: "0",
+  /*
+  the second value provided after an operation
+   */
   secondValue: "0",
+  /*
+  if we just clicked an operation button, make this true, so the next
+  numeric clicked knows to replace what is in the text field
+   */
+  operation: false,
+
+  /*
+  the most important property in the world.
+   */
   fancy: false,
 
   /**
@@ -16,17 +34,20 @@ export default Ember.Controller.extend({
   addValueFromButtonClick: function(value) {
     Ember.Logger.debug("addValueFromButtonClick (controller): " + value);
     var currentResultValue = this.get('resultDisplayValue');
-    if (currentResultValue !== "0") {
+    if (this.get('operation')) { //was last thing done an operation?
+      this.set('resultDisplayValue', '');
+      this.set('operation', false);
+    }
+    if (currentResultValue !== "") {
       this.set('resultDisplayValue', currentResultValue + value);
     } else {
       this.set('resultDisplayValue', value);
     }
-
   },
+
   operationClicked: function(operationString) {
     Ember.Logger.debug("operationClicked (controller): " + operationString);
-  },
-  compute: function() {
-    Ember.Logger.debug('here');
+    this.set('operation', true);
+
   }
 });

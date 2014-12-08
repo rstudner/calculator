@@ -58,13 +58,24 @@ body {
   -kthtml-transition: all 0.5s linear;
   transition: all 0.5s linear;
 
-  .result {
+  .line-block {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .result-row {
     margin: 5px 0 10px 0;
     text-align: center;
+  }
+  .result {
+    .line-block;
     input {
+      height: 18px;
       text-align: right;
-      width: 130px;
+      width: 105px;
     }
+  }
+  .equals {
+    .line-block;
   }
 
   .row {
