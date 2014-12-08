@@ -14,6 +14,8 @@ module.exports = function(app) {
     var arg2 = parseFloat(req.body.args[1]);
 
     var result = 0;
+    var errorText = null;
+
     switch (operation) {
       case '+':
         result = arg1 + arg2;
@@ -25,13 +27,24 @@ module.exports = function(app) {
         result = arg1 * arg2;
         break;
       case '/':
-        result = arg1 / arg2;
+        if (arg2 === 0) { // oh no you didn't!
+          errorText = 'That whole divide by zero thing isnt cool.';
+        } else {
+          result = arg1 / arg2;
+        }
         break;
 
     }
-    res.status(200).send({
-      "result" : result
-    });
+    if (errorText === null) {
+      res.status(200).send({
+        'result' : result
+      });
+    } else {
+      res.status(500).send({
+        'errorText': errorText
+      });
+    }
+
   });
 
   computeRouter.get('/:id', function(req, res) {

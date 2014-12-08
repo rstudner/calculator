@@ -5,22 +5,22 @@ export default Ember.Controller.extend({
   /**
    * Properties
    */
-    /*
-    the text field display value
-     */
+  /*
+   the text field display value
+   */
   resultDisplayValue: "",
 
   inputs: [],
   currentOperation: null,
 
   /*
-  if we just clicked an operation button, make this true, so the next
-  numeric clicked knows to replace what is in the text field
+   if we just clicked an operation button, make this true, so the next
+   numeric clicked knows to replace what is in the text field
    */
   operation: false,
 
   /*
-  the most important property in the world.
+   the most important property in the world.
    */
   fancy: false,
 
@@ -66,13 +66,14 @@ export default Ember.Controller.extend({
         this.set('inputs', []);
         this.set('currentOperation', '');
         Ember.$.post('/api/compute', {
-            operation: currentOperation,
-            args: currentInputs
-          }).then(function(result) {
+          operation: currentOperation,
+          args: currentInputs
+        }).then(function(result) {
           Ember.Logger.debug(result);
           self.set('resultDisplayValue', result.result);
-
-
+        }).fail(function(result) {
+          Ember.Logger.debug("fail!");
+          self.handleFailure(result.responseJSON);
         });
 
       } else {
@@ -84,5 +85,9 @@ export default Ember.Controller.extend({
       this.set('currentOperation', operationString);
       this.set('resultDisplayValue', '');
     }
+  },
+  handleFailure: function(json) {
+    Ember.Logger.debug(json);
+    swal("Hey homer", json.errorText, "error");
   }
 });
