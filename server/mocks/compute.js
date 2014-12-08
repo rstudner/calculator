@@ -10,10 +10,27 @@ module.exports = function(app) {
 
   computeRouter.post('/', function(req, res) {
     var operation = req.body.operation;
-    var arg1 = parseInt(req.body.args[0]);
-    var arg2 = parseInt(req.body.args[1]);
+    var arg1 = parseFloat(req.body.args[0]);
+    var arg2 = parseFloat(req.body.args[1]);
+
+    var result = 0;
+    switch (operation) {
+      case '+':
+        result = arg1 + arg2;
+        break;
+      case '-':
+        result = arg1 - arg2;
+        break;
+      case '*':
+        result = arg1 * arg2;
+        break;
+      case '/':
+        result = arg1 / arg2;
+        break;
+
+    }
     res.status(200).send({
-      "result" : arg1 + arg2
+      "result" : result
     });
   });
 
