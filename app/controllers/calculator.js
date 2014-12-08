@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
   /**
    * Properties
    */
-  result: "0",
+  resultDisplayValue: "0",
   firstValue: "0",
   secondValue: "0",
   fancy: false,
@@ -15,11 +15,11 @@ export default Ember.Controller.extend({
    */
   addValueFromButtonClick: function(value) {
     Ember.Logger.debug("addValueFromButtonClick (controller): " + value);
-    var currentResultValue = this.get('result');
+    var currentResultValue = this.get('resultDisplayValue');
     if (currentResultValue !== "0") {
-      this.set('result', currentResultValue + value);
+      this.set('resultDisplayValue', currentResultValue + value);
     } else {
-      this.set('result', value);
+      this.set('resultDisplayValue', value);
     }
 
   },
