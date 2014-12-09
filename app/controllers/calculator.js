@@ -29,11 +29,11 @@ export default Ember.Controller.extend({
    */
   addValueFromButtonClick: function(value) {
     Ember.Logger.debug("addValueFromButtonClick (controller): " + value);
-    var currentResultValue = this.get('resultDisplayValue');
     if (this.get('operation')) { //was last thing done an operation?
       this.set('resultDisplayValue', '');
       this.set('operation', false);
     }
+    var currentResultValue = this.get('resultDisplayValue');
     if (currentResultValue !== "") {
       this.set('resultDisplayValue', currentResultValue + value);
     } else {
@@ -58,6 +58,7 @@ export default Ember.Controller.extend({
     }
 
     if (operationString === '=') { //do some computation
+      //self.set('operation', false);
       if (currentInputs.get('length') === 2) {
         Ember.Logger.debug("current args: " + currentInputs);
         //actually do the math on the server
